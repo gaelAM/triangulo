@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipo de Triángulo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.116), rgba(0, 0, 0, 0.5)), url('images/fondo\ figuras\ geometricas.jpg'); 
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+button {
+    background-color: #18bbc1;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #01797d;
+}
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+}
+img {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 20px;
+}
+    </style>
+
+    <div class="container">
+        <h1>¿Qué triángulo es?</h1>
+        <h3>Ingrese la medida de los lados del triangulo</h3>
+        <input type="number" id="lado1" placeholder="Lado 1" min="1" required>
+        <input type="number" id="lado2" placeholder="Lado 2" min="1" required>
+        <input type="number" id="lado3" placeholder="Lado 3" min="1" required> <br><br>
+        <button onclick="determinarTriangulo()">Determinar</button>
+        <div class="result" id="resultado"></div>
+        <img id="imagenTriangulo" alt="">
+    </div>
+
+    <script>
+        function determinarTriangulo() {
+            const lado1 = parseInt(document.getElementById('lado1').value);
+            const lado2 = parseInt(document.getElementById('lado2').value);
+            const lado3 = parseInt(document.getElementById('lado3').value);
+            const resultado = document.getElementById('resultado');
+            const imagen = document.getElementById('imagenTriangulo');
+
+            if (isNaN(lado1) || isNaN(lado2) || isNaN(lado3)) {
+                resultado.textContent = 'Por favor, ingresa todos los lados del triángulo.';
+                imagen.src = '';
+                return;
+            }
+
+            if (lado1 <= 0 || lado2 <= 0 || lado3 <= 0) {
+                resultado.textContent = 'Los lados deben ser mayores a 0.';
+                imagen.src = '';
+                return;
+            }
+
+            if (lado1 === lado2 && lado2 === lado3) {
+                resultado.textContent = 'El triángulo es equilátero (tres lados iguales).';
+                imagen.src = 'https://cdn-icons-png.flaticon.com/512/13/13384.png';
+            } else if (lado1 === lado2 || lado1 === lado3 || lado2 === lado3) {
+                resultado.textContent = 'El triángulo es isósceles (dos lados iguales).';
+                imagen.src = 'https://images.vexels.com/content/158600/preview/isosceles-triangle-apex-silhouette-b14274.png';
+            } else {
+                resultado.textContent = 'El triángulo es escaleno (ningún lado igual).';
+                imagen.src = 'https://i.pinimg.com/564x/9a/55/1a/9a551aad704ba1ed2c73f4f4e0fc3262.jpg';
+            }
+        }
+    </script>
+
+</body>
+</html>
